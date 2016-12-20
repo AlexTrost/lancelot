@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @poster_information.description %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @poster_information.location %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @poster_information.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @poster_information.phone %>
+</p>
+
+<p>
+  <strong>Skype:</strong>
+  <%= @poster_information.skype %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @poster_information.website %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @poster_information.user %>
+</p>
+
+<%= link_to 'Edit', edit_poster_information_path(@poster_information) %> |
+<%= link_to 'Back', poster_informations_path %>

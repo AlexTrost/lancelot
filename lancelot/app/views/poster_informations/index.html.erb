@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Poster Informations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Location</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Skype</th>
+      <th>Website</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @poster_informations.each do |poster_information| %>
+      <tr>
+        <td><%= poster_information.description %></td>
+        <td><%= poster_information.location %></td>
+        <td><%= poster_information.email %></td>
+        <td><%= poster_information.phone %></td>
+        <td><%= poster_information.skype %></td>
+        <td><%= poster_information.website %></td>
+        <td><%= poster_information.user %></td>
+        <td><%= link_to 'Show', poster_information %></td>
+        <td><%= link_to 'Edit', edit_poster_information_path(poster_information) %></td>
+        <td><%= link_to 'Destroy', poster_information, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Poster information', new_poster_information_path %>

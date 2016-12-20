@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+    
+
+      <%= simple_form_for @application, :html => {:class => "form-horizontal"} do |f| %>
+
+        <% if @application.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@application.errors.count, "error") %> prohibited this application from being saved:</h2>
+
+            <ul>
+            <% @application.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= f.hidden_field :freelancer_information_id, :value => current_user.freelancer_information.id %>
+        <%= f.hidden_field :post_id, :value => @post.id %>
+
+
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="description">Statement of Purpose</label>
+            <div class="controls">
+              <%= f.text_area :description, class: "form-control input-lg" %>
+              <p class="help-block">Think of this as a sort of cover letter. It can be as long or as short as you'd like.</p>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="ammount">Project Bid Amount</label><br>
+            <div class="col-md-6 col-sm-6">
+              <div class="input-group"> 
+                Hourly:
+                <span class="input-group-addon">
+                  <%= f.radio_button :hourly, true, id: "optionsRadiosX"  %>
+                </span>
+                <%= f.number_field :amount, class: "form-control" %>
+              </div>
+            </div>
+                  
+            <div class="col-md-6 col-sm-6">
+              <div class="input-group"> 
+                Project:
+                <span class="input-group-addon">
+                  <%= f.radio_button :hourly, false, id: "optionsRadiosY" %>
+                </span>
+                <%= f.number_field :amount, class: "form-control" %>
+              </div>
+            </div>
+            <p class="help-block">Set your hourly rate or your fee for the whole project.</p>
+          </div>
+
+
+
+
+          <div class="control-group">
+            <label class="control-label" for="payment_protection">Payment Protection</label>
+              <div class="controls">
+                <%= f.select :payment_protection, options_for_select(["None", "Half", "Full"]), {}, {class: "form-control"}  %>
+              </div>
+              <p class="help-block">Payment protection amount defines what percentage of the final payment your employer will be required to pay in advanced. Full payment protection is recommended to protect the time you spend. Lancelot is not responsible for an emplyer's failure to pay at the end of the project.</p>
+          </div>
+          
+          <div class="control-group">
+            <%= f.submit "Apply", class: "btn btn-success" %>
+          </div>
+        </fieldset>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>
+         
+            <div class="control-group">
+              <!-- Button -->
+            </div>
+
+

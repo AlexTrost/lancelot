@@ -1,0 +1,1 @@
+json.partial! "freelancer_informations/freelancer_information", freelancer_information: @freelancer_information

@@ -1,0 +1,1 @@
+json.array! @poster_informations, partial: 'poster_informations/poster_information', as: :poster_information

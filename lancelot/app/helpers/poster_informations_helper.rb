@@ -1,0 +1,2 @@
+module PosterInformationsHelper
+end

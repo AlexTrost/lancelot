@@ -1,0 +1,2 @@
+json.extract! freelancer_information, :id, :description, :location, :email, :phone, :skype, :website, :user_id, :created_at, :updated_at
+json.url freelancer_information_url(freelancer_information, format: :json)

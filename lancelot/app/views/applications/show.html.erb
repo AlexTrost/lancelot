@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Hourly:</strong>
+  <%= @application.hourly %>
+</p>
+
+<p>
+  <strong>Freelancer information:</strong>
+  <%= @application.freelancer_information %>
+</p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @application.post %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @application.description %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @application.amount %>
+</p>
+
+<p>
+  <strong>Payment protection:</strong>
+  <%= @application.payment_protection %>
+</p>
+
+<%= link_to 'Edit', edit_application_path(@application) %> |
+<%= link_to 'Back', applications_path %>

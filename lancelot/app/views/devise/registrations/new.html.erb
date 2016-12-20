@@ -1,0 +1,68 @@
+<div class="row">
+  
+  <div class="col-md-6">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Sign up</h3>
+      </div>
+      <div class="panel-body">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+
+          <div class="field">
+            <%= f.label :Username %><br />
+            <%= f.text_field :name, autofocus: true %>
+          </div>
+
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email%>
+          </div>
+
+          <div class="field">
+     
+            <%= f.radio_button :type, 'freelancer' %> 
+            <%= f.label :type, 'Freelancer', :value => 'freelancer' %>
+            <br>
+            <%= f.radio_button :type, 'manager' %>
+            <%= f.label :type, 'Manager', :value => 'manager' %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password %>
+            <% if @validatable %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "off" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Sign up" %>
+          </div>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Welcome to Lancelot!</h3>
+      </div>
+      <div class="panel-body">
+        Lancelot brings managers with projects together with freelancers with skills. Create an account to get started! 
+      </div>
+    </div>
+    
+  </div>
+
+</div>

@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-10">
+			<h2>
+			  <%= @post.title %>
+			</h2>
+		</div>
+		<div class="col-md-2">
+			<h2>
+				<% if current_user.applied(@post) %>
+          <button class="btn btn-success">You've already applied!</button>
+				<% else %>
+			  	<%= link_to "Apply", new_application_path(post_id: @post.id), class: "btn btn-primary" %>
+				<% end %>
+			</h2>
+		</div>
+	</div>
+
+	<p>
+	  <%= @post.description %>
+	</p>
+	
+	<p>
+		<strong>Posted by:</strong>
+		<%= link_to @post.poster_information.user.email, user_path(@post.poster_information.user.id) %> 
+	</p>
+
+	<p>
+		<strong>Posted on:</strong>
+		<%= @post.created_at.strftime("%B %d, %Y at %I:%M%p") %> 
+	</p>
+
+	<%= link_to 'Edit', edit_post_path(@post) %> |
+	<%= link_to 'Back', posts_path %>
+</div>
+
+
+post(id: integer, title: text, description: boolean, poster_information_id: integer, awarded_to_id: integer, created_at: datetime, updated_at: datetime)

@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+  
+  <!-- sidebar -->
+  <div class="row row-offcanvas row-offcanvas-left">
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <ul class="nav">
+          <li><h3>Tags</h3></li>
+          <li class="active"><a href="#">Link 1</a></li>
+          <li><a href="#">Link 2</a></li>
+          <li><a href="#">Link 3</a></li>              
+          <li><a href="#">Link 4</a></li>
+        </ul>
+    </div>
+
+    <!-- main content -->
+    <div class="col-xs-12 col-sm-9">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Go!</button>
+        </span>
+      </div><!-- /input-group -->
+
+      <h1>Listing Posts</h1>
+
+
+
+          <div class="list-group">
+                <a href="#" class="list-group-item">
+                  <h4 class="list-group-item-heading">List group item heading</h4>
+                  <p class="list-group-item-text">description </p>
+                  <small><p class="list-group-item-text">tags tags tags tags</p></small>
+                </a>
+              </div>
+              <div class="list-group">
+                <a href="#" class="list-group-item">
+                  <h4 class="list-group-item-heading">List group item heading</h4>
+                  <p class="list-group-item-text">...</p>
+                </a>
+              </div>
+          <% @posts.each do |post| %>
+            <tr>
+              <div class="list-group">
+                <%= link_to post_path(id: post.id), :class => "list-group-item" do %>
+                  <% if current_user.applied(post) %>
+                    <span style="float:right"><button class="btn btn-success btn-sm">Applied!</button></span>
+                  <% end %>
+                <!-- <a href="#" class="list-group-item"> -->
+                  <h4 class="list-group-item-heading"><%= post.title %></h4>
+                  <p class="list-group-item-text"><%= post.description %></p>
+                  <!-- <small><p class="list-group-item-text">< %= post.tags.each { |tag| tag.name } %></p></small> -->
+                <!-- </a> -->
+                <% end %>
+              </div>
+            </tr>
+          <% end %>
+        
+      <br>
+
+      <% if current_user.type == "poster" %>
+        <%= link_to 'New Post', new_post_path %>
+      <% end %>
+    </div>
+  </div>

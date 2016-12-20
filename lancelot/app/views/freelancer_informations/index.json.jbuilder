@@ -1,0 +1,1 @@
+json.array! @freelancer_informations, partial: 'freelancer_informations/freelancer_information', as: :freelancer_information

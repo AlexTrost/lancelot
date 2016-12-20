@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @freelancer_information.description %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @freelancer_information.location %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @freelancer_information.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @freelancer_information.phone %>
+</p>
+
+<p>
+  <strong>Skype:</strong>
+  <%= @freelancer_information.skype %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @freelancer_information.website %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @freelancer_information.user %>
+</p>
+
+<%= link_to 'Edit', edit_freelancer_information_path(@freelancer_information) %> |
+<%= link_to 'Back', freelancer_informations_path %>
