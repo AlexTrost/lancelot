@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   
   match '/dashboard', to: 'users#dashboard', via: :get
   match '/profile', to: 'users#profile', via: :get
+  
+  match 'user/toggle', to: 'users#toggle', via: :get
+
 
 
 end

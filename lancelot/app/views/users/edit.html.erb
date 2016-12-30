@@ -1,7 +1,9 @@
 <div class="container">
-    <h1>Edit Profile</h1>
-  	<hr>
-	<div class="row">
+    <h1>Edit Profile</h1> 
+    <h3><%= current_user.freelancer ? "Freelancer" : "Manager" %> Mode</h3>
+
+    <hr>
+  <div class="row">
     <%= simple_form_for current_user, remote: :true, :html => {:class => "form-to-submit"} do |f| %>
 
       <!-- left column -->
@@ -16,11 +18,15 @@
       
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
-        <div class="alert alert-info alert-dismissable">
+
+       <!--  <div class="alert alert-info alert-dismissable">
           <a class="panel-close close" data-dismiss="alert">×</a> 
           <i class="fa fa-coffee"></i>
           This is an <strong>.alert</strong>. Use this to show important messages to the user.
-        </div>
+        </div> -->
+
+
+
         <h3>Personal info</h3>
         
         <form class="form-horizontal" role="form">
@@ -30,14 +36,16 @@
               <%= f.text_field :name, class: "name-field form-control" %>
             </div>
           </div>
-          <%= f.simple_fields_for :post_information do |ff| %>
-
-            <div class="form-group">
-              <label class="col-lg-3 control-label">Email:</label>
-              <div class="col-lg-8">
-                <%= ff.text_field :email, class: "name-field form-control" %>
-              </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+              <%= f.text_field :email, class: "name-field form-control" %>
             </div>
+          </div>
+
+          <% subform = current_user.freelancer ? :freelancer_information : :post_information %>
+          <% hi = current_user.freelancer ? "freelancer_information" : "post_information" %>
+          <%= f.simple_fields_for subform do |ff| %>
             <div class="form-group">
               <label class="col-lg-3 control-label">Phone:</label>
               <div class="col-lg-8">

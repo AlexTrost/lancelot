@@ -22,11 +22,11 @@
 
           <div class="field">
      
-            <%= f.radio_button :type, 'freelancer' %> 
-            <%= f.label :type, 'Freelancer', :value => 'freelancer' %>
+            <%= f.radio_button :freelancer, 'freelancer' %> 
+            <%= f.label :freelancer, 'Freelancer', :value => true %>
             <br>
-            <%= f.radio_button :type, 'manager' %>
-            <%= f.label :type, 'Manager', :value => 'manager' %>
+            <%= f.radio_button :freelancer, 'manager' %>
+            <%= f.label :freelancer, 'Manager', :value => false %>
           </div>
 
           <div class="field">

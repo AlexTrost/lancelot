@@ -29,11 +29,11 @@ ActiveRecord::Schema.define(version: 20161123222322) do
 
   create_table "freelancer_informations", force: :cascade do |t|
     t.text     "description"
-    t.text     "location"
-    t.text     "email"
-    t.text     "phone"
-    t.text     "skype"
-    t.text     "website"
+    t.string   "location"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "skype"
+    t.string   "website"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -43,11 +43,11 @@ ActiveRecord::Schema.define(version: 20161123222322) do
 
   create_table "poster_informations", force: :cascade do |t|
     t.text     "description"
-    t.text     "location"
-    t.text     "email"
-    t.text     "phone"
-    t.text     "skype"
-    t.text     "website"
+    t.string   "location"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "skype"
+    t.string   "website"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -56,10 +56,12 @@ ActiveRecord::Schema.define(version: 20161123222322) do
   add_index "poster_informations", ["user_id"], name: "index_poster_informations_on_user_id"
 
   create_table "posts", force: :cascade do |t|
-    t.text     "title"
-    t.boolean  "description"
+    t.string   "title"
+    t.text     "description"
     t.integer  "poster_information_id"
     t.integer  "awarded_to_id"
+    t.integer  "budget"
+    t.boolean  "hourly"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
@@ -77,7 +79,7 @@ ActiveRecord::Schema.define(version: 20161123222322) do
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "name"
-    t.string   "type"
+    t.boolean  "freelancer"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

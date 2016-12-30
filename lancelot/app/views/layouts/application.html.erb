@@ -38,6 +38,8 @@
 	          <li><%= link_to "Jobs", posts_path %></li>
 	          <li><a href="#inbox">Inbox</a></li>
             <li><%= link_to("Log out", destroy_user_session_path, method: :delete) %></li>
+            <% title = current_user.freelancer ? "Switch to Employer Mode" : "Switch to Freelancer Mode" %>
+            <li><%= link_to title, user_toggle_path(id: current_user.id), :method => :get, :class => "btn btn-primary btn-sm" %></li>
 	        </ul>
 	      </div>
       <% end %>

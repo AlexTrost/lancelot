@@ -58,7 +58,7 @@
         
       <br>
 
-      <% if current_user.type == "poster" %>
+      <% if !current_user.freelancer  %>
         <%= link_to 'New Post', new_post_path %>
       <% end %>
     </div>
