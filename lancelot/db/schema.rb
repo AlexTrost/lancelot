@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20161123222322) do
     t.string   "phone"
     t.string   "skype"
     t.string   "website"
+    t.string   "attachment"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -48,6 +49,7 @@ ActiveRecord::Schema.define(version: 20161123222322) do
     t.string   "phone"
     t.string   "skype"
     t.string   "website"
+    t.string   "attachment"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -68,6 +70,7 @@ ActiveRecord::Schema.define(version: 20161123222322) do
 
   create_table "skills", force: :cascade do |t|
     t.string   "title"
+    t.string   "years"
     t.integer  "freelancer_information_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false

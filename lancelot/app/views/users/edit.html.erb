@@ -4,15 +4,21 @@
 
     <hr>
   <div class="row">
-    <%= simple_form_for current_user, remote: :true, :html => {:class => "form-to-submit"} do |f| %>
+    <%= simple_form_for setup_freelancer_skills(current_user), remote: :true, :html => {:class => "form-to-submit"}, multipart: true, authenticity_token: true do |f| %>
 
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
-          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-          <h6>Upload a different photo...</h6>
+          <!-- <img src="//placehold.it/100" class="avatar img-circle" alt="avatar"> -->
+          <!-- <h6>Upload a different photo...</h6> -->
           
-          <input type="file" class="form-control">
+          <!-- <input type="file" class="form-control"> -->
+          <!-- <button class="btn m-b surrogate-cw-btn">Upload</button> -->
+          <img title="profile image" class="img-circle avatar img-responsive" src="<%= current_user.information.attachment %>">
+          <% subform = current_user.freelancer ? :freelancer_information : :post_information %>
+          <%= f.simple_fields_for subform do |ff| %>
+            <%= ff.file_field :attachment, class: "uploader" %>
+          <% end %>
         </div>
       </div>
       
@@ -43,9 +49,9 @@
             </div>
           </div>
 
-          <% subform = current_user.freelancer ? :freelancer_information : :post_information %>
           <% hi = current_user.freelancer ? "freelancer_information" : "post_information" %>
           <%= f.simple_fields_for subform do |ff| %>
+
             <div class="form-group">
               <label class="col-lg-3 control-label">Phone:</label>
               <div class="col-lg-8">
@@ -87,6 +93,31 @@
                 </div>
               </div>
             </div>
+
+            <% if current_user.freelancer %>
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Skills:</label>
+                <div class="col-lg-9">
+                  <%= ff.simple_fields_for :skills do |fff| %>
+                    <div clas="row">
+                      <div class="col-xs-7" style="padding-left:0px;"><%= fff.text_field :title, :placeholder => "Add Skill", :class => "st-input input-sm noEnterSubmit form-control"%></div>
+                      <% a=*(1..50) %>
+                      <% range = a.unshift("<1") %>
+                        <%= fff.hidden_field :freelancer_information_id, :value => current_user.freelancer_information.id %>
+                      <div class="col-xs-5">
+                        <label class="control-label">Years:</label>
+                        <%= fff.select :years, (range), :class => "st-input input-sm noEnterSubmit form-control"%>
+                        <% if fff.object.persisted? %>
+                          <%= fff.check_box :_destroy %>
+                          <%= fff.label :_destroy, "Remove" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+
           <% end %>
 <!--           <div class="form-group">
             <label class="col-md-3 control-label">Password:</label>

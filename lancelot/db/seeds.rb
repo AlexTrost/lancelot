@@ -7,5 +7,11 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-User.create(name: "Alex", email: "User@user.user", password: "useruser", freelancer: true)
+User.create(name: "Alex", email: "User@user.user", password: "useruser", freelancer: true, last_active_at: Time.now)
+User.create(name: "Alex3", email: "User@user.user3", password: "useruser", freelancer: true, last_active_at: Time.now)
+alextwo = User.create(name: "Alex2", email: "User@user.user2", password: "useruser", freelancer: false, last_active_at: Time.now)
+
+Post.create(title: "Rails Developer" , description: "Need a coder to code code", poster_information: alextwo.poster_information, budget: 300, hourly: false )
+Post.create(title: "Painter" , description: "Need a painter to paint paint", poster_information: alextwo.poster_information, budget: 30, hourly: true )
+Post.create(title: "Poet" , description: "Need a poet to poet poems", poster_information: alextwo.poster_information, budget: 3, hourly: true )
 

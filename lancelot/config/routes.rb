@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   match '/profile', to: 'users#profile', via: :get
   
   match 'user/toggle', to: 'users#toggle', via: :get
+  match 'application/index_by_post', to: 'applications#index_by_post', via: :get
+  match 'application/award', to: 'applications#award', via: :get
 
 
 

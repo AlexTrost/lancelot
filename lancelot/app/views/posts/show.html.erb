@@ -12,7 +12,7 @@
 		<div class="col-md-2">
 			<h2>
 				<% if current_user.applied(@post) %>
-          <button class="btn btn-success">You've already applied!</button>
+			  	<%= link_to "You've already applied!", application_path(Application.where(post_id: @post.id, freelancer_information_id: current_user.freelancer_information.id).first), class: "btn btn-success" %>
 				<% else %>
 			  	<%= link_to "Apply", new_application_path(post_id: @post.id), class: "btn btn-primary" %>
 				<% end %>

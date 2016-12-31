@@ -7,6 +7,7 @@ class CreateFreelancerInformations < ActiveRecord::Migration
       t.string :phone
       t.string :skype
       t.string :website
+      t.string  :attachment
       t.references :user, index: true, foreign_key: true
 
       t.timestamps null: false

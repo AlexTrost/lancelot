@@ -1,0 +1,70 @@
+<div class="row">
+	<div class="col-md-3">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Jobs Awarded</h3>
+		  </div>
+		  <div class="panel-body">
+		    
+		  </div>
+		</div>
+	</div>
+
+	<div class="col-md-3">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Total Spent</h3>
+		  </div>
+		  <div class="panel-body">
+		    Panel content
+		  </div>
+		</div>
+	</div>
+
+	<div class="col-md-3">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Current Balance Due</h3>
+		  </div>
+		  <div class="panel-body">
+		    Panel content
+		  </div>
+		</div>
+	</div>
+
+	<div class="col-md-9">
+		<div class="panel panel-default">
+	  <!-- Default panel contents -->
+	  <div class="panel-heading">
+		  <h3 class="panel-title">Jobs</h3>
+		</div>
+
+	  <!-- Table -->
+		  <table class="table table-stripped">
+		    <thead>
+		      <tr>
+		        <th>Title</th>
+		        <th>Awarded on</th>
+		        <th>Awarded to</th>
+		        <th>Applications</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    	<% Post.where(poster_information: current_user.poster_information.id).each do |post| %>
+			    	<%= link_to post_path(post.id) do %>
+				      <tr>
+				        <td><%= post.title %></td>
+				        <td><%= "posted awarded on..." %></td>
+				        <td><%= post.awarded_to_id ? post.assigned_to.title : "Not yet awarded" %></td>
+				        <td><%= post.applications.count %></td>
+				        <td><%= link_to "View Applications", application_index_by_post_path(post_id: post.id) if post.applications.count > 0%></td>
+				      </tr>
+		    		<% end %>
+		    	<% end %>
+		    </tbody>
+		  </table>
+		</div>
+	</div>
+
+
+</div>

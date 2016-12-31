@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
   def user_params
 	  # params.require(:user).permit(:name, :freelancer)
-    params.require(:user).permit(:name, :attachment, :email, :password, :password_confirmation, :remember_me, poster_information_attributes:[:description, :location, :email, :phone, :skype, :website], freelancer_information_attributes: [:description, :location, :email, :phone, :skype, :website] )
+    params.require(:user).permit(:name, :attachment, :email, :password, :password_confirmation, :remember_me, poster_information_attributes:[:description, :attachment, :location, :email, :phone, :skype, :website], freelancer_information_attributes: [ :description, :attachment, :location, :email, :phone, :skype, :website, skills_attributes: [:title, :years] ] )
 	end
 
 	

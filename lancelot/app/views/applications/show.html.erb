@@ -12,7 +12,7 @@
 
 <p>
   <strong>Post:</strong>
-  <%= @application.post %>
+  <%= link_to @application.post.title, post_path(@application.post) %>
 </p>
 
 <p>
@@ -30,5 +30,6 @@
   <%= @application.payment_protection %>
 </p>
 
-<%= link_to 'Edit', edit_application_path(@application) %> |
+<%= link_to 'Edit', edit_application_path(@application) if current_user.freelancer_information == @application.freelancer_information %> 
+<%= link_to 'Award Project To This Applicant', application_award_path(application_id: @application.id) if current_user.poster_information == @application.post.poster_information && @application.post.awarded_to_id == nil %> |
 <%= link_to 'Back', applications_path %>

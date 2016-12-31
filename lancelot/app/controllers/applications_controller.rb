@@ -4,7 +4,7 @@ class ApplicationsController < ApplicationController
   # GET /applications
   # GET /applications.json
   def index
-    @applications = Application.all
+    @applications = current_user.applications
   end
 
   # GET /applications/1
@@ -20,6 +20,21 @@ class ApplicationsController < ApplicationController
 
   # GET /applications/1/edit
   def edit
+  end
+
+  def index_by_post
+    @applications = Application.where(post_id: params[:post_id])
+    render "index"
+  end
+
+  def award
+    application = Application.find(params[:application_id])
+    post = application.post
+    awardee = application.freelancer_information
+    post.update_attributes(awarded_to_id: awardee.id)
+    respond_to do |format|
+      format.html { redirect_to dashboard_path, notice: 'Job has been awarded. The freelancer has been notified and will have 72 hours to accept or reject the offer. If they accept, you will recieve a more specific agreement from them over which you will have the power to negociate.' }
+    end
   end
 
   # POST /applications
