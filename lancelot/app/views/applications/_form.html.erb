@@ -41,7 +41,6 @@
                 <%= f.number_field :amount, class: "form-control" %>
               </div>
             </div>
-                  
             <div class="col-md-6 col-sm-6">
               <div class="input-group"> 
                 Project:
@@ -54,8 +53,23 @@
             <p class="help-block">Set your hourly rate or your fee for the whole project.</p>
           </div>
 
+          <div class="control-group">
+            <label class="control-label" for="ammount">Project Payment Interval</label><br>
+            <div class="input-group"> 
 
-
+            <div class="checkbox">
+              <label><%= f.radio_button :payment_interval, "weekly"  %>Weekly</label>
+            </div>
+            <div class="checkbox">
+              <label><%= f.radio_button :payment_interval, "bimonthly"  %>Every Other Week</label>
+            </div>
+            <div class="checkbox">
+              <label><%= f.radio_button :payment_interval, "monthly"  %>Montly</label>
+            </div>
+            <div class="checkbox">
+              <label><%= f.radio_button :payment_interval, "monthly"  %>At Project End</label>
+            </div>
+          </div>  
 
           <div class="control-group">
             <label class="control-label" for="payment_protection">Payment Protection</label>
@@ -64,9 +78,22 @@
               </div>
               <p class="help-block">Payment protection amount defines what percentage of the final payment your employer will be required to pay in advanced. Full payment protection is recommended to protect the time you spend. Lancelot is not responsible for an emplyer's failure to pay at the end of the project.</p>
           </div>
+
+
+          <div class="control-group">
+            <label class="control-label" for="start">Project Start Date</label><br>
+            <% due = @application.project_start ? @application.project_start.strftime("%m/%d/%Y") : nil %>
+            <%= f.text_field :due, :value => due, :placeholder => "Project Start Date", :id => 'datepicker'%> N/A: <%= check_box_tag :no_due, 1, (true if @application.project_start == nil), {:id => "date_checkbox"} %><br>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="start">Project End Date</label><br>
+            <% due = @application.project_end ? @application.project_end.strftime("%m/%d/%Y") : nil %>
+            <%= f.text_field :due, :value => due, :placeholder => "Project End Date", :id => 'datepicker'%> N/A: <%= check_box_tag :no_due, 1, (true if @application.project_end == nil), {:id => "date_checkbox"} %><br>
+          </div>
           
           <div class="control-group">
-            <%= f.submit "Apply", class: "btn btn-success" %>
+            <%= f.submit "Send", class: "btn btn-success" %>
           </div>
         </fieldset>
 

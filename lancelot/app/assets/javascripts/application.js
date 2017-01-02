@@ -15,5 +15,6 @@
 //= require turbolinks
 //= require bootstrap
 //= require image-picker
+//= require datepicker/bootstrap-datepicker.js
 
 //= require_tree .

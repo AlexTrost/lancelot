@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :freelancer_informations
   resources :posts
   resources :users
+  resources :contracts
   
   # devise_for :users
   

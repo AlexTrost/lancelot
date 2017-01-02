@@ -19,7 +19,7 @@
         <tr>
           <td><%= application.post.title %></td>
           <td><%= application.created_at.strftime("%B %d, %Y") %></td>
-          <td><%= application.status(current_user) %></td>
+          <td><%= application.status_poster(application.freelancer_information) %></td>
           <td><%= link_to application.post.poster_information.user.title, user_path(application.post.poster_information.user) %></td>
           <td><%= link_to 'View', application %></td>
           <td><%= (link_to 'Unapply', application, method: :delete, data: { confirm: 'Are you sure?' } ) if application.freelancer_information == current_user.freelancer_information %></td>

@@ -9,5 +9,9 @@ class FreelancerInformation < ActiveRecord::Base
     :reject_if => proc { |att| 
       att[:title].blank?
     }
+
+  def title
+  	self.email ? self.email : self.user.title 
+  end
   
 end

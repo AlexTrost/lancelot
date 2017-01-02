@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123222322) do
+ActiveRecord::Schema.define(version: 20170101201401) do
 
   create_table "applications", force: :cascade do |t|
     t.boolean  "hourly"
@@ -20,12 +20,35 @@ ActiveRecord::Schema.define(version: 20161123222322) do
     t.text     "description"
     t.integer  "amount"
     t.string   "payment_protection"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.boolean  "acknowledged",              default: false
+    t.integer  "weekly_hours"
+    t.string   "payment_interval"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.datetime "project_start"
+    t.datetime "project_end"
   end
 
   add_index "applications", ["freelancer_information_id"], name: "index_applications_on_freelancer_information_id"
   add_index "applications", ["post_id"], name: "index_applications_on_post_id"
+
+  create_table "contracts", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "application_id"
+    t.boolean  "hourly"
+    t.integer  "amount"
+    t.string   "payment_protection"
+    t.boolean  "freelancer_signed",   default: false
+    t.boolean  "poster_signed",       default: false
+    t.boolean  "freelancer_approved", default: false
+    t.boolean  "poster_approved",     default: false
+    t.integer  "weekly_hours"
+    t.string   "payment_interval"
+    t.datetime "project_start"
+    t.datetime "project_end"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "freelancer_informations", force: :cascade do |t|
     t.text     "description"

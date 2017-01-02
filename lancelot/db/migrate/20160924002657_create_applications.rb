@@ -7,8 +7,12 @@ class CreateApplications < ActiveRecord::Migration
       t.text :description
       t.integer :amount
       t.string :payment_protection
-
+      t.boolean :acknowledged, default: false
+      t.integer :weekly_hours
+      t.string :payment_interval
       t.timestamps null: false
+      t.datetime :project_start
+      t.datetime :project_end
     end
   end
 end

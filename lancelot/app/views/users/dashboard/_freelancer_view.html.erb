@@ -46,6 +46,7 @@
 		        <th>Title</th>
 		        <th>Awarded on</th>
 		        <th>Employer</th>
+		        <th>Action Required</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -54,20 +55,16 @@
 				      <tr>
 				        <td><%= post.title %></td>
 				        <td><%= "posted awarded on..." %></td>
-				        <td><%= post.created_by.title %></td>
+				        <td><%= link_to post.poster_information.title, user_path(post.poster_information.user) %></td>
+				        <% if post.action_required?(current_user) %>
+				        	<td><%= link_to post.action_required?(current_user), new_contract_path(post_id: post.id, freelancer_information_id: current_user.freelancer_information.id) %></td>
+				        <% end %>
+				        <% if !post.contracts.where(freelancer_information_id: current_user.freelancer_information.id) %>
+				        	<td><button type="button" class="btn btn-success btn-sm"><%= "Newly Awarded!" %></button></td>
+				        <% end %>
 				      </tr>
 		    		<% end %>
 		    	<% end %>
-		      <tr>
-		        <td>Mary</td>
-		        <td>Moe</td>
-		        <td>mary@example.com</td>
-		      </tr>
-		      <tr>
-		        <td>July</td>
-		        <td>Dooley</td>
-		        <td>july@example.com</td>
-		      </tr>
 		    </tbody>
 		  </table>
 		</div>
@@ -95,7 +92,7 @@
 		        <tr>
 		          <td><%= application.post.title %></td>
 		          <td><%= application.created_at.strftime("%B %d, %Y") %></td>
-		          <td><%= application.status(current_user) %></td>
+		          <td><%= application.status_freelancer(current_user) %></td>
 		          <td><%= link_to application.post.poster_information.user.title, user_path(application.post.poster_information.user) %></td>
 		          <td><%= link_to 'Show', application %></td>
 		          <td><%= link_to 'Unapply', application, method: :delete, data: { confirm: 'Are you sure?' } %></td>

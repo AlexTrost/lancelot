@@ -1,0 +1,126 @@
+<div class="container">
+  <h2>Contract for <%= link_to @post.title, post_path(@post) %></h2>
+  <div class="row">
+    <div class="col-md-6">
+    
+
+      <%= simple_form_for @contract, :html => {:class => "form-horizontal"} do |f| %>
+
+        <% if @contract.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@contract.errors.count, "error") %> prohibited this contract from being saved:</h2>
+
+            <ul>
+            <% @contract.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= f.hidden_field :post_id, :value => @post.id %>
+        <%= f.hidden_field :freelancer_approved, :value => true %>
+
+
+        <fieldset>
+
+
+          <div class="control-group">
+            <label class="control-label" for="ammount">Project Bid Amount</label><br>
+            <div>
+              <div class="input-group"> 
+                Hourly:
+                <span class="input-group-addon">
+                  <%= f.radio_button :hourly, true, id: "optionsRadiosX"  %>
+                </span>
+                <%= f.number_field :amount, class: "form-control" %>
+              </div>
+            </div>
+            <div class="input-group"> 
+              Project:
+              <span class="input-group-addon">
+                <%= f.radio_button :hourly, false, id: "optionsRadiosY" %>
+              </span>
+              <%= f.number_field :amount, class: "form-control" %>
+            </div>
+            <p class="help-block">Set your hourly rate or your fee for the whole project.</p>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="ammount">Project Payment Interval</label><br>
+            <div class="input-group"> 
+
+            <div class="checkbox">
+              <label><%= f.radio_button :payment_interval, "weekly"  %>Weekly</label>
+            </div>
+            <div class="checkbox">
+              <label><%= f.radio_button :payment_interval, "bimonthly"  %>Every Other Week</label>
+            </div>
+            <div class="checkbox">
+              <label><%= f.radio_button :payment_interval, "monthly"  %>Montly</label>
+            </div>
+            <div class="checkbox">
+              <label><%= f.radio_button :payment_interval, "monthly"  %>At Project End</label>
+            </div>
+          </div>   
+                  
+  
+
+          <div class="control-group">
+            <label class="control-label" for="start">Project Start Date</label><br>
+            <% due = @contract.project_start ? @contract.project_start.strftime("%m/%d/%Y") : nil %>
+            <%= f.text_field :due, :value => due, :placeholder => "Project Start Date", :id => 'datepicker_start'%> N/A: <%= check_box_tag :no_due, 1, (true if @contract.project_start == nil), {:id => "date_checkbox"} %><br>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="start">Project End Date</label><br>
+            <% due = @contract.project_end ? @contract.project_end.strftime("%m/%d/%Y") : nil %>
+            <%= f.text_field :due, :value => due, :placeholder => "Project End Date", :id => 'datepicker_end'%> N/A: <%= check_box_tag :no_due, 1, (true if @contract.project_end == nil), {:id => "date_checkbox"} %><br>
+          </div>
+
+
+          <div class="control-group">
+            <label class="control-label" for="payment_protection">Payment Protection</label>
+              <div class="controls">
+                <%= f.select :payment_protection, options_for_select(["None", "Half", "Full"]), {}, {class: "form-control"}  %>
+              </div>
+              <p class="help-block">Payment protection amount defines what percentage of the final payment your employer will be required to pay in advanced. Full payment protection is recommended to protect the time you spend. Lancelot is not responsible for an emplyer's failure to pay at the end of the project.</p>
+          </div>
+          
+          <div class="control-group">
+            <%= f.submit "Send Contract To Employer", class: "btn btn-success" %><p class="help-block">Once your employer approves the contract, you will both be asked to sign it. We strongly recommend that you do not start working until your employer signs the contracts and, if you selected a payment protection amount, until your employer has deposited the specified amount in our system.</p>
+          </div>
+        </fieldset>
+
+      <% end %>
+
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3>Your Application Information</h3>
+            <strong>Description:</strong> <%= @application.description ? @application.description : "Not Specified"%><br>
+            <strong>Amount:</strong> <%= @application.amount ? @application.amount : "Not Specified"%><br>
+            <strong>Payment Project Level:</strong> <%= @application.payment_protection ? @application.payment_protection : "Not Specified"%><br>
+            <strong>Hours Per Cycle:</strong> <%= @application.weekly_hours ? @application.weekly_hours : "Not Specified"%><br>
+            <strong>Cycle Interval:</strong> <%= @application.payment_interval ? @application.payment_interval : "Not Specified"%><br>
+            <strong>Project Start Date:</strong> <%= @application.project_start ? @application.project_start : "Not Specified"%><br>
+            <strong>Project End Date:</strong> <%= @application.project_end ? @application.project_end : "Not Specified"%><br>
+          
+          <hr>
+
+          <h3>Original Post Information</h3>
+          <strong>Title:</strong> <%= @post.title ? @post.title : "Not Specified"%><br>
+          <strong>Description:</strong> <%= @post.description ? @post.description : "Not Specified"%><br>
+          <strong>Budget:</strong> <%= @post.budget ? @post.budget : "Not Specified"%><br>
+          <strong>Hourly:</strong> <%= @post.hourly ? @post.hourly : "Not Specified"%><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+         
+            <div class="control-group">
+              <!-- Button -->
+            </div>
+

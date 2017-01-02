@@ -1,0 +1,18 @@
+
+.datepicker-years {
+  display: none !important;
+}
+
+.datepicker-months {
+  display: none !important;
+}
+.datepicker-days {
+  display: block !important;
+}
+
+.datepicker-days .prev {
+  cursor: default;
+}
+.datepicker-days .next {
+  cursor: default;
+}
