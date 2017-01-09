@@ -1,0 +1,6 @@
+<% if current_user.freelancer_information.id == @post.awarded_to_id %> 
+	<p class="help-block"> <h4>Status: <strong>Awaiting poster payment protection deposit from poster.</strong></h4> <br> Once payment protection amount has been recieved by our system, you will be notified and can begin working on your project. To protect your time, we strongly recommend that you do not start working until the payment protection amount has been recived by our system. </p>
+<% elsif  current_user.poster_information.id == @post.poster_information_id %>
+	<%= link_to "Deposit Safe Payment Amount", "#"  %>
+<% else %>
+<% end %>

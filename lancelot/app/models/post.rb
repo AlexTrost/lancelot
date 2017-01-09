@@ -10,13 +10,26 @@ class Post < ActiveRecord::Base
   end 
 
   def action_required?(user)
-  	if !self.contract
-  		"Create contract" 
-  	elsif self.contract.awaiting_freelancer_signature
-  		"Sign contract"
-  	else
-  		"None"
-  	end
+    is_freelancer = user.freelancer_information.id == self.awarded_to_id
+    is_poster = user.poster_information.id == self.poster_information_id
+    if !self.contract && is_freelancer
+      "Create contract"
+    else
+      "None"
+    end 
+  	if self.contract
+	  	if (self.contract.awaiting_freelancer_signature && is_freelancer) || (self.contract.awaiting_poster_signature && is_poster)
+	  		"Sign contract"
+	  	elsif self.contract.awaiting_poster_approval && is_poster
+	  		"Approve contract"
+	  	elsif self.contract.awaiting_safepayment && is_poster
+        "Deposit Payment Protection"
+      else
+	  		"None"
+	  	end
+	  else
+	  	"None"
+	  end
   end
 
   # def action_required_path(user)

@@ -1,0 +1,55 @@
+<div class="container">
+  <h2>Contract for <%= link_to @post.title, post_path(@post) %></h2>
+  <div class="row">
+    <div class="col-md-7">
+    	<div class="panel panel-default">
+        <div class="panel-body">
+          <h3>Contract Information</h3>
+						<strong>Hourly: </strong> <%= @contract.hourly %><br>
+						<strong>Amount: </strong> <%= @contract.amount %><br>
+						<strong>Payment Protection: </strong> <%= @contract.payment_protection %><br>
+						<strong>Weekly Hours: </strong> <%= @contract.weekly_hours %><br>
+						<strong>Payment Interval: </strong> <%= @contract.payment_interval %><br>
+						<strong>Project Start: </strong> <%= @contract.project_start %><br>
+						<strong>Project End: </strong> <%= @contract.project_end %><br>
+
+
+	      	<% if @contract.awaiting_poster_approval %>
+	      		<%= render partial: "awaiting_approval" %>
+	      	<% elsif @contract.awaiting_poster_signature || @contract.awaiting_freelancer_signature %>
+	      		<%= render partial: "awaiting_signature" %>
+	      	<% else @contract.awaiting_safepayment %>
+	      		<%= render partial: "awaiting_safepayment" %>
+	      	<% end %>
+      	</div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3>Original Application Information</h3>
+            <strong>Description:</strong> <%= @application.description ? @application.description : "Not Specified"%><br>
+            <strong>Amount:</strong> <%= @application.amount ? @application.amount : "Not Specified"%><br>
+            <strong>Payment Project Level:</strong> <%= @application.payment_protection ? @application.payment_protection : "Not Specified"%><br>
+            <strong>Hours Per Cycle:</strong> <%= @application.weekly_hours ? @application.weekly_hours : "Not Specified"%><br>
+            <strong>Cycle Interval:</strong> <%= @application.payment_interval ? @application.payment_interval : "Not Specified"%><br>
+            <strong>Project Start Date:</strong> <%= @application.project_start ? @application.project_start : "Not Specified"%><br>
+            <strong>Project End Date:</strong> <%= @application.project_end ? @application.project_end : "Not Specified"%><br>
+          
+          <hr>
+
+          <h3>Original Post Information</h3>
+          <strong>Title:</strong> <%= @post.title ? @post.title : "Not Specified"%><br>
+          <strong>Description:</strong> <%= @post.description ? @post.description : "Not Specified"%><br>
+          <strong>Budget:</strong> <%= @post.budget ? @post.budget : "Not Specified"%><br>
+          <strong>Hourly:</strong> <%= @post.hourly ? @post.hourly : "Not Specified"%><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+         
+            <div class="control-group">
+              <!-- Button -->
+            </div>
+

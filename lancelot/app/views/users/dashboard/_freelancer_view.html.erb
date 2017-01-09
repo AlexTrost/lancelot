@@ -56,11 +56,12 @@
 				        <td><%= post.title %></td>
 				        <td><%= "posted awarded on..." %></td>
 				        <td><%= link_to post.poster_information.title, user_path(post.poster_information.user) %></td>
-				        <% if post.action_required?(current_user) %>
-				        	<td><%= link_to post.action_required?(current_user), new_contract_path(post_id: post.id, freelancer_information_id: current_user.freelancer_information.id) %></td>
-				        <% end %>
-				        <% if !post.contracts.where(freelancer_information_id: current_user.freelancer_information.id) %>
-				        	<td><button type="button" class="btn btn-success btn-sm"><%= "Newly Awarded!" %></button></td>
+				        <% if post.action_required?(current_user) == "None" %>
+				        	<td>None</td>
+				        	<% elsif post.action_required?(current_user) == "Sign contract"  %>
+				        	<td><%= link_to post.action_required?(current_user), contract_action_path(post_id: post.id) %></td>
+				        	<% else %>
+				        		<td><%= link_to post.action_required?(current_user), new_contract_path(post_id: post.id, freelancer_information_id: current_user.freelancer_information.id) %></td>
 				        <% end %>
 				      </tr>
 		    		<% end %>
@@ -69,6 +70,8 @@
 		  </table>
 		</div>
 	</div>
+
+
 
 
 	<div class="col-md-9">

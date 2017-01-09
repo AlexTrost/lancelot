@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p><%= @user.email %>,</p>
+
+    <p><%= PosterInformation.find(@contract.post.poster_information_id).title %>'s has approved your contract for the project <%= @contract.post.name %> on Lancelot, and so it is ready for you to sign. </p>
+    <br>
+    <p>Visit <a href="https://lancelot.herokuapp.com"> Contract Page </a> to sign the contract if you haven't already.</p> 
+  	<br>
+  	<br>
+  	<p>Happy managing,<br> The Lancelot team</p>
+  	
+  </body>
+</html>

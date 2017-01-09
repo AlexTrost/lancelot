@@ -1,0 +1,10 @@
+<% if @contract.awaiting_poster_approval && current_user.poster_id == @post.poster_information_id %>
+	<%= simple_form_for @contract, :url => {:action => "approve", :method => "update", :id => @contract}, :html => {:class => "form-horizontal"} do |f| %>
+  	<div class="control-group">
+    	<%= f.submit "Approve Contract", class: "btn btn-success" %>
+    	<p class="help-block">Once you approve the contract, you and the freelancer will both be asked to sign it. Once signed by both parties, you will be asked to desposit the payment protection amount in our system if one was selected by the freelancer. Once the payment protection amount has been recieved by our system, the freelancer will be notified and can begin working on your project.</p>
+  	</div>
+	<% end %> 
+<% else @contract.awaiting_poster_approval && current_user.freelancer_information.id == @post.awarded_to_id %> 
+	<p class="help-block">Awaiting contract approval from the poster. Once approved, you and the poster will both be asked to sign it. Once signed by both parties,the poster will be asked to desposit the payment protection amount in our system if one was selected by you. Once the payment protection amount has been recieved by our system, you will be notified and can begin working on your project. To protect your time, we strongly recommend that you do not start working until the safepayment amount has been recived by our system. </p>
+<% end %> 

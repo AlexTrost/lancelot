@@ -1,0 +1,20 @@
+	
+		<% if @contract.awaiting_poster_signature && current_user.poster_id == @post.poster_information_id %>
+			<%= simple_form_for @contract, :url => {:action => "sign", :method => "update", :id => @contract}, :html => {:class => "form-horizontal"} do |f| %>
+				<div class="control-group">
+	    		<%= f.submit "Sign Contract", class: "btn btn-success" %>
+	    	</div>
+			<% end %>
+	    <p class="help-block">Once you and the freelancer have signed the contract, you will be asked to desposit the payment protection amount in our system if one was selected by the freelancer. Once the payment protection amount has been recieved by our system, the freelancer will be notified and can begin working on your project.</p>
+		<% elsif @contract.awaiting_freelancer_signature && current_user.freelancer_information.id == @post.awarded_to_id %> 
+			<p class="help-block">Once you and the poster have signed the contract, the poster will be asked to desposit the payment protection amount in our system if one was selected by you. Once the payment protection amount has been recieved by our system, you will be notified and can begin working on your project. To protect your time, we strongly recommend that you do not start working until the safepayment amount has been recived by our system. </p>
+			<%= simple_form_for @contract, :url => {:action => "sign", :method => "update", :id => @contract}, :html => {:class => "form-horizontal"} do |f| %>
+				<div class="control-group">
+	    		<%= f.submit "Sign Contract", class: "btn btn-success" %>
+	    	</div>
+			<% end %>
+		<% elsif @contract.awaiting_freelancer_signature && current_user.poster_information.id == @post.poster_information_id %> 
+			<p class="help-block"> <h4>Status: <strong>Awaiting freelancer signature. </strong></h4><br> You will be notified when the freelancer has signed. At that time you will be asked to desposit the payment protection amount in our system if one was selected by the freelancer. Once the payment protection amount has been recieved by our system, the freelancer will be notified and can begin working on your project.</p>
+		<% elsif @contract.awaiting_poster_signature && current_user.freelance_information.id == @post.awarded_to_id %> 
+			<p class="help-block"> <h4>Status: <strong>Awaiting poster signature and payment protection deposit.</strong></h4> <br> Once signature and payment protection amount has been recieved by our system, you will be notified and can begin working on your project. To protect your time, we strongly recommend that you do not start working until the payment protection amount has been recived by our system. </p>
+		<% end %>

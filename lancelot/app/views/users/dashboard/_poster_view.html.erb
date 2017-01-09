@@ -47,6 +47,7 @@
 		        <th>Awarded on</th>
 		        <th>Awarded to</th>
 		        <th>Applications</th>
+		        <th>Action Required</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -56,8 +57,12 @@
 				        <td><%= post.title %></td>
 				        <td><%= "posted awarded on..." %></td>
 				        <td><%= post.awarded_to_id ? post.assigned_to.title : "Not yet awarded" %></td>
-				        <td><%= post.applications.count %></td>
-				        <td><%= link_to "View Applications", application_index_by_post_path(post_id: post.id) if post.applications.count > 0%></td>
+				        <td><%= post.applications.count %> <%= link_to "View Applications", application_index_by_post_path(post_id: post.id) if post.applications.count > 0%></td>
+				        <% if post.action_required?(current_user) == "None" %>
+				        	<td>None</td>
+				        <% else post.action_required?(current_user) == "Sign contract" || post.action_required?(current_user) == "Approve contract" || post.action_required?(current_user) == "Deposit Payment Protection"  %>
+				        	<td><%= link_to post.action_required?(current_user), contract_action_path(post_id: post.id) %></td>
+				        <% end %>
 				      </tr>
 		    		<% end %>
 		    	<% end %>

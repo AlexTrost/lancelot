@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   match 'user/toggle', to: 'users#toggle', via: :get
   match 'application/index_by_post', to: 'applications#index_by_post', via: :get
   match 'application/award', to: 'applications#award', via: :get
+  match 'contract/action', to: 'contracts#action', via: :get
+  match 'contract/approve', to: 'contracts#approve', via: :patch
+  match 'contract/sign', to: 'contracts#sign', via: :patch
 
 
 

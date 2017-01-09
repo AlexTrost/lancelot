@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p><%= @user.email %>,</p>
+
+    <p><%= FreelancerInformation.find(@contract.post.awarded_to_id).title %> has submited a contract for your project <%= @contract.post.name %> on Lancelot. </p>
+    <br>
+    <p>Visit <a href="https://lancelot.herokuapp.com"> Contract Page </a> to view and approve the contract if you haven't already.</p> 
+  	<br>
+  	<br>
+  	<p>Happy managing,<br> The Lancelot team</p>
+  	
+  </body>
+</html>

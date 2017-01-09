@@ -49,6 +49,38 @@ class ContractsController < ApplicationController
     end
   end
 
+  def action
+  	@post = Post.find(params[:post_id])
+  	@contract = @post.contract
+  	@application = Application.where(freelancer_information_id: @post.awarded_to_id, post: @post).first
+  	@user = current_user
+  end
+
+  def approve
+  	@contract = Contract.find(params[:id])
+  	@post = @contract.post
+  	@application = Application.where(freelancer_information_id: @post.awarded_to_id, post: @post).first
+  	poster = current_user.poster_information.id == @post.poster_information_id
+  	@contract.update_attributes(poster_approved: true) if poster
+  	render "action"
+  end
+
+  def sign
+  	@contract = Contract.find(params[:id])
+  	@post = @contract.post
+  	@application = Application.where(freelancer_information_id: @post.awarded_to_id, post: @post).first
+  	if current_user.poster_information.id == @post.poster_information_id
+  		@contract.update_attributes(poster_signed: true)
+  	elsif  current_user.freelancer_information.id == @post.awarded_to_id
+  		@contract.update_attributes(freelancer_signed: true)
+  	else
+  	end
+  	respond_to do |format|
+      format.html { render :action }
+      # format.json { render json: @contract.errors, status: :unprocessable_entity }
+    end
+  end
+
   # PATCH/PUT /contracts/1
   # PATCH/PUT /contracts/1.json
   def update
