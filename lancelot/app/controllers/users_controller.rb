@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 
 	def create
 		"yo " * 200
+    UserNotifier.send_signup_email(@user).deliver_later
 	end
 
 	def update
@@ -34,9 +35,6 @@ class UsersController < ApplicationController
 
 	def edit
 	end 
-
-	def create
-	end
 
 	private
 

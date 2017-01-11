@@ -37,9 +37,10 @@ class ContractsController < ApplicationController
   # POST /contracts.json
   def create
     @contract = Contract.new(contract_params)
-
+    poster = @contract.post.poster_information.user
     respond_to do |format|
       if @contract.save
+        UserNotifier.send_contract_ready_to_approve_for_poster_email(user, @contract).deliver_later
         format.html { redirect_to '/dashboard', notice: "Contract was successfully created and has been sent to employer. You will be notified when they have approved it, at which point you will be asked to sign." }
         format.json { render :show, status: :created, location: @contract }
       else
@@ -61,18 +62,28 @@ class ContractsController < ApplicationController
   	@post = @contract.post
   	@application = Application.where(freelancer_information_id: @post.awarded_to_id, post: @post).first
   	poster = current_user.poster_information.id == @post.poster_information_id
-  	@contract.update_attributes(poster_approved: true) if poster
+  	if poster  
+      freelancer = FreelancerInformation.find(@post.awarded_to_id).user  
+      @contract.update_attributes(poster_approved: true) 
+      UserNotifier.send_contract_ready_to_sign_for_freelancer_email(freelancer, @contract).deliver_later
+    end
   	render "action"
   end
 
   def sign
   	@contract = Contract.find(params[:id])
   	@post = @contract.post
+    poster = PosterInformation.find(@post.poster_information_id).user
   	@application = Application.where(freelancer_information_id: @post.awarded_to_id, post: @post).first
   	if current_user.poster_information.id == @post.poster_information_id
   		@contract.update_attributes(poster_signed: true)
   	elsif  current_user.freelancer_information.id == @post.awarded_to_id
   		@contract.update_attributes(freelancer_signed: true)
+      if @contract.poster_approved == false
+        UserNotifier.send_contract_ready_to_sign_for_poster_email(poster, @contract).deliver_later
+      else
+        UserNotifier.send_safepay_needed(poster, @contract).deliver_later
+      end
   	else
   	end
   	respond_to do |format|

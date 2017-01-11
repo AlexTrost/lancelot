@@ -32,6 +32,7 @@ class ApplicationsController < ApplicationController
     post = application.post
     awardee = application.freelancer_information
     post.update_attributes(awarded_to_id: awardee.id)
+    UserNotifier.send_new_job_awarded_email(awardee, post).deliver_later
     respond_to do |format|
       format.html { redirect_to dashboard_path, notice: 'Job has been awarded. The freelancer has been notified and will have 72 hours to accept or reject the offer. If they accept, you will recieve a more specific agreement from them over which you will have the power to negociate.' }
     end
@@ -44,6 +45,9 @@ class ApplicationsController < ApplicationController
 
     respond_to do |format|
       if @application.save
+        post = Post.find[params[:post_id]]
+        user = @post.poster_information.user
+        UserNotifier.send_new_application_email(user, post).deliver_later
         format.html { redirect_to @application, notice: 'Application was successfully created.' }
         format.json { render :show, status: :created, location: @application }
       else
